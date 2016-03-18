@@ -15,12 +15,55 @@
 			name: $("#name").val(),
 			password: $("#password").val()
 		},function(info){
-			$("#alter").text(info);
+			alert(info);
 		});
 	}
 	//登陆
 	function login(){
-		
+		$.post('/userManager/userManager.php', {
+			type: 'login',
+			name: $("#name").val(),
+			password: $("#password").val()
+		}, function(info){
+			alert(info);
+		});
+	}
+	function logout(){
+		$.post('/userManager/userManager.php', {
+			type: 'logout'
+		}, function(info){
+			alert(info);
+		});
+	}
+	function viewLogin(){
+		$.post('/userManager/userManager.php', {
+			type: 'viewLogin'
+		}, function(info){
+			alert(info);
+		});
+	}
+	function attention(){
+		$.post('/userManager/userManager.php', {
+			type: 'attention',
+			name: $("#name").val()
+		}, function(info){
+			alert(info);
+		});
+	}
+	function noAttention(){
+		$.post('/userManager/userManager.php', {
+			type: 'noAttention',
+			name: $("#name").val()
+		}, function(info){
+			alert(info);
+		});
+	}
+	function checkIn(){
+		$.post('/userManager/userManager.php', {
+			type: 'checkIn'
+		}, function(info){
+			alert(info);
+		});
 	}
 	</script>
 </head>
@@ -31,6 +74,10 @@
 <button type="button" onclick="regist()">注册</button>
 <button type="button" onclick="login()">登陆</button>
 <button type="button" onclick="logout()">退出</button>
+<button type="button" onclick="viewLogin()">显示已登陆的用户</button>
+<button type="button" onclick="attention()">关注</button>
+<button type="button" onclick="noAttention()">取消关注</button>
+<button type="button" onclick="checkIn()">签到</button>
 <br>
 </body>
 </html>
