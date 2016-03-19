@@ -4,6 +4,7 @@
 	<meta charset='utf-8' />
 	<title>Hello Image</title>
 	<script src="./jquery.js"></script>
+	<script src="./jquery.json.min.js"></script>
 	<script type="text/javascript">
 	$(document).ready(function(){
 		/**/
@@ -65,6 +66,18 @@
 			alert(info);
 		});
 	}
+	function listGz(type){
+		$.post('/userManager/userManager.php', {
+			type: type
+		}, function(info){
+			/*obj = $.parseJSON(info);
+			friendNum = obj.friendNum;
+			for(i=0; i<friendNum; i++){
+				$("#info").val() += obj.friendList[i];
+			}*/
+			alert(info);
+		});
+	}
 	</script>
 </head>
 <body>
@@ -78,6 +91,10 @@
 <button type="button" onclick="attention()">关注</button>
 <button type="button" onclick="noAttention()">取消关注</button>
 <button type="button" onclick="checkIn()">签到</button>
+<button type="button" onclick="listGz('friend')">好友</button>
+<button type="button" onclick="listGz('fans')">粉丝</button>
+<button type="button" onclick="listGz('gz')">关注的人</button>
 <br>
+<div id="info"></div>
 </body>
 </html>
