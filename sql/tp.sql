@@ -2,7 +2,8 @@
 create table user (
 	id int unsigned auto_increment primary key,
 	name varchar(30),
-	password char(20)
+	password char(20),
+	fraction int not null default 0
 );
 
 #图片信息的表

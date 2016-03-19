@@ -18,6 +18,8 @@ switch($_POST['type']){
 			$uid = $result['id'];
 			//创建签到表
 			$db->query('create table checkIn'.$uid.'(checkInDate date, checkInTime time, continuousNum int unsigned)');
+			//创建积分信息表
+			$db->query('create table fraction'.$uid.'(fractionDate date, fractionTime time, info text');
 			echo '注册成功!';
 		}
 		break;
@@ -142,6 +144,26 @@ switch($_POST['type']){
 			$gzList[$i] = $nameCol['name'];
 		}
 		echo json_encode(array('gzNum'=>$gzNum, 'gzList'=>$gzList));
+		break;
+	case 'addFraction':
+		//添加积分增加信息到积分信息表
+		$db->query('insert into fraction'.$_SESSION['uid'].'(fractionDate, fractionTime, info) values(curdate(), curtime(), "'.$_POST['info'].'")');
+		//加分到数据表里的积分字段
+		$result = $db->query('update user set fraction=fraction+'.$_POST['fractionNum'].' where id='.$_SESSION['uid']);
+		echo 'add success!';
+		break;
+	case 'cutFraction':
+		$result = $db->query('select fraction from user where id='.$_SESSION['uid'])->fetch_assoc();
+		$fraction = $result['fraction'];
+		if($fraction < $_POST['fractionNum']){
+			echo 'less';
+			break;
+		}
+		//添加减增加信息到积分信息表
+		$db->query('insert into fraction'.$_SESSION['uid'].'(fractionDate, fractionTime, info) values(curdate(), curtime(), "'.$_POST['info'].'")');
+		//加分到数据表里的积分字段
+		$result = $db->query('update user set fraction=fraction-'.$_POST['fractionNum'].' where id='.$_SESSION['uid']);
+		echo 'cut success!';
 		break;
 	default:
 		break;

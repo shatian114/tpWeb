@@ -70,11 +70,15 @@
 		$.post('/userManager/userManager.php', {
 			type: type
 		}, function(info){
-			/*obj = $.parseJSON(info);
-			friendNum = obj.friendNum;
-			for(i=0; i<friendNum; i++){
-				$("#info").val() += obj.friendList[i];
-			}*/
+			alert(info);
+		});
+	}
+	function modifyFraction(type){
+		$.post('/userManager/userManager.php', {
+			type: type,
+			fractionNum: $("#fraction").val(),
+			info: '测试增加'
+		}, function(info){
 			alert(info);
 		});
 	}
@@ -84,6 +88,7 @@
 <h1>注册</h1>
 <input type="text" id="name" /><br>
 <input type="password" id="password" /><br>
+<input type="text" id="fraction" /><br>
 <button type="button" onclick="regist()">注册</button>
 <button type="button" onclick="login()">登陆</button>
 <button type="button" onclick="logout()">退出</button>
@@ -94,6 +99,9 @@
 <button type="button" onclick="listGz('friend')">好友</button>
 <button type="button" onclick="listGz('fans')">粉丝</button>
 <button type="button" onclick="listGz('gz')">关注的人</button>
+<br>
+<button type="button" onclick="modifyFraction('addFraction')">增加积分</button>
+<button type="button" onclick="modifyFraction('cutFraction')">减积分</button>
 <br>
 <div id="info"></div>
 </body>
