@@ -19,7 +19,7 @@ switch($_POST['type']){
 			//创建签到表
 			$db->query('create table checkIn'.$uid.'(checkInDate date, checkInTime time, continuousNum int unsigned)');
 			//创建积分信息表
-			$db->query('create table fraction'.$uid.'(fractionDate date, fractionTime time, info text');
+			$db->query('create table fraction'.$uid.'(fractionDate date, fractionTime time, info text)');
 			echo '注册成功!';
 		}
 		break;
@@ -150,7 +150,9 @@ switch($_POST['type']){
 		$db->query('insert into fraction'.$_SESSION['uid'].'(fractionDate, fractionTime, info) values(curdate(), curtime(), "'.$_POST['info'].'")');
 		//加分到数据表里的积分字段
 		$result = $db->query('update user set fraction=fraction+'.$_POST['fractionNum'].' where id='.$_SESSION['uid']);
-		echo 'add success!';
+		if($result){
+			echo 'add success!';
+		}
 		break;
 	case 'cutFraction':
 		$result = $db->query('select fraction from user where id='.$_SESSION['uid'])->fetch_assoc();
@@ -163,7 +165,20 @@ switch($_POST['type']){
 		$db->query('insert into fraction'.$_SESSION['uid'].'(fractionDate, fractionTime, info) values(curdate(), curtime(), "'.$_POST['info'].'")');
 		//加分到数据表里的积分字段
 		$result = $db->query('update user set fraction=fraction-'.$_POST['fractionNum'].' where id='.$_SESSION['uid']);
-		echo 'cut success!';
+		if($result){
+			echo 'cut success!';
+		}
+		break;
+	case 'upHeaderImgUrl':
+		$db->query('update user set headerImgUrl="'.$_POST['headerImgUrl'].'" where id='.$_SESSION['uid']);
+		echo '0';
+		break;
+	case 'upFullData':
+		$sqlStr = 'update user set remarkName="'.$_POST['remarkName'].'" and sex="'.$_POST['sex'].'" and address="'.$_POST['address'].'" and identityNum="'.$_POST['identityNum'].'" and mobilePhone="'.$_POST['mobilePhone'].'" and bornDate="'.$_POST['bornDate'].'" where id='.$_SESSION['uid'];
+		$result = $db->query('update user set remarkName="'.$_POST['remarkName'].'", sex="'.$_POST['sex'].'", address="'.$_POST['address'].'", identityNum="'.$_POST['identityNum'].'", mobilePhone="'.$_POST['mobilePhone'].'", bornDate="'.$_POST['bornDate'].'" where id='.$_SESSION['uid']);
+		if($result){
+			echo '0';
+		}
 		break;
 	default:
 		break;

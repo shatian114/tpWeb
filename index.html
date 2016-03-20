@@ -82,13 +82,34 @@
 			alert(info);
 		});
 	}
+	function upHeaderImgUrl(){
+		$.post('/userManager/userManager.php', {
+			type: 'upHeaderImgUrl',
+			headerImgUrl: $("#fraction").val()
+		}, function(info){
+			alert(info);
+		});
+	}
+	function upFullData(){
+		$.post('/userManager/userManager.php', {
+			type: 'upFullData',
+			remarkName: $("#remarkName").val(),
+			sex: $("#sex").val(),
+			address: $("#address").val(),
+			identityNum: $("#identityNum").val(),
+			mobilePhone: $("#mobilePhone").val(),
+			bornDate: $("#bornDate").val()
+		}, function(info){
+			alert(info);
+		});
+	}
 	</script>
 </head>
 <body>
 <h1>注册</h1>
-<input type="text" id="name" /><br>
-<input type="password" id="password" /><br>
-<input type="text" id="fraction" /><br>
+用户名：<input type="text" id="name" /><br>
+密码：<input type="password" id="password" /><br>
+积分：<input type="text" id="fraction" /><br>
 <button type="button" onclick="regist()">注册</button>
 <button type="button" onclick="login()">登陆</button>
 <button type="button" onclick="logout()">退出</button>
@@ -102,6 +123,16 @@
 <br>
 <button type="button" onclick="modifyFraction('addFraction')">增加积分</button>
 <button type="button" onclick="modifyFraction('cutFraction')">减积分</button>
+<br>
+<button type="button" onclick="upHeaderImgUrl()">上传头像</button>
+<br>
+备注昵称：<input type="text" id="remarkName" />
+性别：<input type="text" id="sex" />
+地址：<input type="text" id="address" />
+身份证号：<input type="text" id="identityNum" />
+手机号：<input type="text" id="mobilePhone" />
+出生日期：<input type="text" id="bornDate" />
+<button type="button" onclick="upFullData()">上传详细资料</button>
 <br>
 <div id="info"></div>
 </body>
