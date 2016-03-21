@@ -103,6 +103,24 @@
 			alert(info);
 		});
 	}
+	function createTag(){
+		$.post('/userManager/userManager.php', {
+			type: 'createTag',
+			tagName: $("#tagName").val()
+		}, function(info){
+			alert(info);
+		});
+	}
+	function createImgFolder(){
+		$.post('/userManager/userManager.php', {
+			type: 'createImgFolder',
+			imgFolderName: $("#imgFolderName").val(),
+			imgFolderTag: $("#imgFolderTag").val(),
+			imgFolderExplanation: $("#imgFolderExplanation").val()
+		}, function(info){
+			alert(info);
+		});
+	}
 	</script>
 </head>
 <body>
@@ -125,15 +143,22 @@
 <button type="button" onclick="modifyFraction('cutFraction')">减积分</button>
 <br>
 <button type="button" onclick="upHeaderImgUrl()">上传头像</button>
-<br>
-备注昵称：<input type="text" id="remarkName" />
-性别：<input type="text" id="sex" />
-地址：<input type="text" id="address" />
-身份证号：<input type="text" id="identityNum" />
-手机号：<input type="text" id="mobilePhone" />
-出生日期：<input type="text" id="bornDate" />
+<hr>
+备注昵称：<input type="text" id="remarkName" /><br>
+性别：<input type="text" id="sex" /><br>
+地址：<input type="text" id="address" /><br>
+身份证号：<input type="text" id="identityNum" /><br>
+手机号：<input type="text" id="mobilePhone" /><br>
+出生日期：<input type="text" id="bornDate" /><br>
 <button type="button" onclick="upFullData()">上传详细资料</button>
-<br>
+<hr>
+tag名：<input type="text" id="tagName" /><br>
+<button type="button" onclick="createTag()">提交tag</button>
+<hr>
+相册名：<input type="text" id="imgFolderName" /><br>
+相册tag：<input type="text" id="imgFolderTag" /><br>
+相册说明：<input type="text" id="imgFolderExplanation" /><br>
+<button type="button" onclick="createImgFolder()">提交相册名</button>
 <div id="info"></div>
 </body>
 </html>

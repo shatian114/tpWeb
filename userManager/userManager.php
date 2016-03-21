@@ -180,6 +180,24 @@ switch($_POST['type']){
 			echo '0';
 		}
 		break;
+	case 'createTag':
+		//如果没有tag表，则创建
+		$db->query('create table if not exists tag'.$_SESSION['uid'].'(id int unsigned not null primary key auto_increment, name varchar(255))');
+		//将tag插入到tag表里
+		$db->query('insert into tag'.$_SESSION['uid'].'(name) values("'.$_POST['tagName'].'")');
+		echo '0';
+		break;
+	case 'createImgFolder':
+		//如果不存在本用户的相册的信息表，则创建
+		$db->query('create table if not exists imgFolderInfo'.$_SESSION['uid'].'(id int unsigned not null auto_increment primary key, name varchar(255), tag varchar(255), explanation varchar(255))');
+		//将相册的信息插入到信息表
+		$db->query('insert into imgFolderInfo'.$_SESSION['uid'].'(name, tag, explanation) values("'.$_POST['imgFolderName'].'", "'.$_POST['imgFolderTag'].'", "'.$_POST['imgFolderExplanation'].'")');
+		$result = $db->query('select max(id) from imgFolderInfo'.$_SESSION['uid'])->fetch_assoc();
+		$imgFolderId = $result['max(id)'];
+		//创建相册
+		$db->query('create table imgFolder'.$_SESSION['uid'].'_'.$imgFolderId.'(id int unsigned not null auto_increment primary key, url varchar(255), tag varchar(255), explanation varchar(255))');
+		echo '0';
+		break;
 	default:
 		break;
 }

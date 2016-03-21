@@ -19,6 +19,8 @@ create table user (
 	identityNum char(18),
 	#手机号
 	mobilePhone char(11),
+	#手机号验证
+	mobilePhoneVerify char(1) not null default '0',
 	#出生日期
 	bornDate date,
 	#年级
@@ -27,8 +29,18 @@ create table user (
 
 #图片信息的表
 create table imgInfo (
+	#图片的id
+	id int unsigned,
+	#图片上传者的id
+	uid int unsigned,
+	#图片相册的id
+	imgFolderId int unsigned,
+	#图片的url
 	url varchar(200),
-	propritary int
+	#图片的tag
+	tag varchar(255),
+	#图片的说明
+	explanation text
 );
 
 #用户直接相互关系的表，如关注，粉丝
