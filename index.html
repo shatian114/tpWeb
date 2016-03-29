@@ -6,14 +6,17 @@
 	<script src="./jquery.js"></script>
 	<script src="./jquery.json.min.js"></script>
 	<script type="text/javascript">
-	$(document).ready(function(){
-		/**/
-	});
 	//注册
 	function regist(){
-		$.post('/userManager/userManager.php',{
-			type: "regist",
+		$.post('/userManager/regist.php',{
 			name: $("#name").val(),
+			password: $("#password").val()
+		},function(info){
+			alert(info);
+		});
+	}
+	function changePassword(){
+		$.post('/userManager/changePassword.php',{
 			password: $("#password").val()
 		},function(info){
 			alert(info);
@@ -21,8 +24,7 @@
 	}
 	//登陆
 	function login(){
-		$.post('/userManager/userManager.php', {
-			type: 'login',
+		$.post('/userManager/login.php', {
 			name: $("#name").val(),
 			password: $("#password").val()
 		}, function(info){
@@ -30,21 +32,19 @@
 		});
 	}
 	function logout(){
-		$.post('/userManager/userManager.php', {
-			type: 'logout'
+		$.post('/userManager/logout.php', {
 		}, function(info){
 			alert(info);
 		});
 	}
-	function viewLogin(){
-		$.post('/userManager/userManager.php', {
-			type: 'viewLogin'
+	function getUserData(){
+		$.post('/userManager/getUserData.php', {
 		}, function(info){
 			alert(info);
 		});
 	}
 	function attention(){
-		$.post('/userManager/userManager.php', {
+		$.post('/userManager/attention.php', {
 			type: 'attention',
 			name: $("#name").val()
 		}, function(info){
@@ -52,48 +52,57 @@
 		});
 	}
 	function noAttention(){
-		$.post('/userManager/userManager.php', {
-			type: 'noAttention',
+		$.post('/userManager/noAttention.php', {
 			name: $("#name").val()
 		}, function(info){
 			alert(info);
 		});
 	}
 	function checkIn(){
-		$.post('/userManager/userManager.php', {
-			type: 'checkIn'
+		$.post('/userManager/checkIn.php', {
 		}, function(info){
 			alert(info);
 		});
 	}
-	function listGz(type){
-		$.post('/userManager/userManager.php', {
-			type: type
+	function listFriend(){
+		$.post('/userManager/friend.php', {
 		}, function(info){
 			alert(info);
 		});
 	}
-	function modifyFraction(type){
-		$.post('/userManager/userManager.php', {
-			type: type,
+	function listFans(){
+		$.post('/userManager/fans.php', {
+		}, function(info){
+			alert(info);
+		});
+	}
+	function listGz(){
+		$.post('/userManager/gz.php', {
+		}, function(info){
+			alert(info);
+		});
+	}
+	function addFraction(){
+		$.post('/userManager/addFraction.php', {
 			fractionNum: $("#fraction").val(),
 			info: '测试增加'
 		}, function(info){
 			alert(info);
 		});
 	}
-	function upHeaderImgUrl(){
-		$.post('/userManager/userManager.php', {
-			type: 'upHeaderImgUrl',
-			headerImgUrl: $("#fraction").val()
+	function cutFraction(){
+		$.post('/userManager/cutFraction.php', {
+			fractionNum: $("#fraction").val(),
+			info: '测试减少'
 		}, function(info){
 			alert(info);
 		});
 	}
 	function upFullData(){
-		$.post('/userManager/userManager.php', {
-			type: 'upFullData',
+		$.post('/userManager/upFullData.php', {
+			alipay: $("#alipay").val(),
 			remarkName: $("#remarkName").val(),
+			headerImgUrl: $("#headerImgUrl").val(),
 			sex: $("#sex").val(),
 			address: $("#address").val(),
 			identityNum: $("#identityNum").val(),
@@ -112,11 +121,111 @@
 		});
 	}
 	function createImgFolder(){
-		$.post('/userManager/userManager.php', {
-			type: 'createImgFolder',
+		$.post('/imgManager/createImgFolder.php', {
 			imgFolderName: $("#imgFolderName").val(),
 			imgFolderTag: $("#imgFolderTag").val(),
 			imgFolderExplanation: $("#imgFolderExplanation").val()
+		}, function(info){
+			alert(info);
+		});
+	}
+	function upImg(){
+		$.post('/imgManager/upImg.php', {
+			imgNum: '2',
+			imgFolderId: '1_0',
+			imgJson: {
+				'0':{
+					imgTag: $("#imgTag").val(),
+					imgExplanation: $("#imgExplanation").val(),
+					imgUrl: $("#imgUrl").val(),
+					imgTitle: $("#imgTitle").val(),
+					imgWidth: $("#imgWidth").val(),
+					imgHeight: $("#imgHeight").val(),
+					imgTitlePage: $("#imgTitlePage").val(),
+					software: $("#software").val(),
+					tool: $("#tool").val(),
+					remark: $("#remark").val()
+				},
+				'1':{
+					imgTag: $("#imgTag2").val(),
+					imgExplanation: $("#imgExplanation2").val(),
+					imgUrl: $("#imgUrl2").val(),
+					imgTitle: $("#imgTitle2").val(),
+					imgWidth: $("#imgWidth2").val(),
+					imgHeight: $("#imgHeight2").val(),
+					imgTitlePage: $("#imgTitlePage2").val(),
+					software: $("#software2").val(),
+					tool: $("#tool2").val(),
+					remark: $("#remark2").val()
+				}
+			}
+		}, function(info){
+			alert(info);
+		});
+	}
+	function addTag(){
+		$.post('/imgManager/addTag.php', {
+			addId: $("#addId").val(),
+			tag: $("#tag").val()
+		}, function(info){
+			alert(info);
+		});
+	}
+	function getSameTagImg(){
+		$.post('/imgManager/sameTagImg.php', {
+			sameTag: $("#sameTag").val()
+		}, function(info){
+			alert(info);
+		});
+	}
+	function getSameTagImgFolder(){
+		$.post('/imgManager/sameTagImgFolder.php', {
+			sameTag: $("#sameTag").val()
+		}, function(info){
+			alert(info);
+		});
+	}
+	function collect(){
+		$.post('/imgManager/collect.php', {
+			id: $("#collectId").val()
+		}, function(info){
+			alert(info);
+		});
+	}
+	function searchUser(){
+		$.post('/userManager/userManager.php', {
+			type: 'searchUser',
+			name: $("#name").val()
+		}, function(info){
+			alert(info);
+		});
+	}
+	function forbidUser(){
+		$.post('/userManager/forbidUser.php', {
+			id: $("#name").val()
+		}, function(info){
+			alert(info);
+		});
+	}
+	function reportImg(){
+		$.post('/imgManager/reportImg.php', {
+			reportId: $("#reportId").val(),
+			argument: $("#argument").val()
+		}, function(info){
+			alert(info);
+			//$("#info").text(info);
+		});
+	}
+	function getImg(){
+		$.post('/imgManager/getImg.php', {
+			imgFolderId: $("#getId").val()
+		}, function(info){
+			alert(info);
+		});
+	}
+	function getImgFolder(){
+		$.post('/imgManager/getImgFolder.php', {
+			userId: $("#getId").val()
 		}, function(info){
 			alert(info);
 		});
@@ -129,36 +238,85 @@
 密码：<input type="password" id="password" /><br>
 积分：<input type="text" id="fraction" /><br>
 <button type="button" onclick="regist()">注册</button>
+<button type="button" onclick="changePassword()">修改密码</button>
 <button type="button" onclick="login()">登陆</button>
 <button type="button" onclick="logout()">退出</button>
-<button type="button" onclick="viewLogin()">显示已登陆的用户</button>
+<button type="button" onclick="getUserData()">显示已登陆的用户</button>
 <button type="button" onclick="attention()">关注</button>
 <button type="button" onclick="noAttention()">取消关注</button>
 <button type="button" onclick="checkIn()">签到</button>
-<button type="button" onclick="listGz('friend')">好友</button>
-<button type="button" onclick="listGz('fans')">粉丝</button>
-<button type="button" onclick="listGz('gz')">关注的人</button>
+<button type="button" onclick="listFriend()">好友</button>
+<button type="button" onclick="listFans()">粉丝</button>
+<button type="button" onclick="listGz()">关注的人</button>
+<button type="button" onclick="searchUser()">查找用户</button>
+<button type="button" onclick="forbidUser()">禁止用户</button>
 <br>
-<button type="button" onclick="modifyFraction('addFraction')">增加积分</button>
-<button type="button" onclick="modifyFraction('cutFraction')">减积分</button>
+<button type="button" onclick="addFraction()">增加积分</button>
+<button type="button" onclick="cutFraction()">减积分</button>
 <br>
 <button type="button" onclick="upHeaderImgUrl()">上传头像</button>
 <hr>
 备注昵称：<input type="text" id="remarkName" /><br>
+头像url：<input type="text" id="headerImgUrl" /><br>
 性别：<input type="text" id="sex" /><br>
 地址：<input type="text" id="address" /><br>
 身份证号：<input type="text" id="identityNum" /><br>
 手机号：<input type="text" id="mobilePhone" /><br>
 出生日期：<input type="text" id="bornDate" /><br>
+支付宝：<input type="text" id="alipay" /><br>
 <button type="button" onclick="upFullData()">上传详细资料</button>
-<hr>
-tag名：<input type="text" id="tagName" /><br>
-<button type="button" onclick="createTag()">提交tag</button>
 <hr>
 相册名：<input type="text" id="imgFolderName" /><br>
 相册tag：<input type="text" id="imgFolderTag" /><br>
 相册说明：<input type="text" id="imgFolderExplanation" /><br>
 <button type="button" onclick="createImgFolder()">提交相册名</button>
+<hr>
+相册名：<input type="text" id="upImgFolderName" /><br>
+照片url：<input type="text" id="imgUrl" /><br>
+标题：<input type="text" id="imgTitle" /><br>
+照片tag：<input type="text" id="imgTag" /><br>
+照片说明：<input type="text" id="imgExplanation" /><br>
+封面：<input type="text" id="imgTitlePage" /><br>
+高：<input type="text" id="imgHeight" /><br>
+宽：<input type="text" id="imgWidth" /><br>
+软件：<input type="text" id="software" /><br>
+工具：<input type="text" id="tool" /><br>
+注释：<input type="text" id="remark" /><br>
+<hr>
+相册名：<input type="text" id="upImgFolderName2" /><br>
+照片url：<input type="text" id="imgUrl2" /><br>
+标题：<input type="text" id="imgTitle2" /><br>
+照片tag：<input type="text" id="imgTag2" /><br>
+照片说明：<input type="text" id="imgExplanation2" /><br>
+封面：<input type="text" id="imgTitlePage2" /><br>
+高：<input type="text" id="imgHeight2" /><br>
+宽：<input type="text" id="imgWidth2" /><br>
+软件：<input type="text" id="software2" /><br>
+工具：<input type="text" id="tool2" /><br>
+注释：<input type="text" id="remark2" /><br>
+<button type="button" onclick="upImg()">提交照片</button>
+<hr>
+要添加的id：<input type="text" id="addId"><br>
+tag内容：<input type="text" id="tag"><br>
+<button type="button" onclick="addTag()">添加tag</button>
+<hr>
+<input type="text" id="sameTag"><br>
+<button type="button" onclick="getSameTagImg()">获取相同tag图片</button>
+<button type="button" onclick="getSameTagImgFolder()">获取相同tag相册</button>
+<hr>
+收藏的id：<input type="text" id="collectId"><br>
+<button type="button" onclick="collect()">收藏</button>
+<hr>
+<input type="text" id="searchImgNum">
+<button type="button" onclick="searchImg()">搜图片</button>
 <div id="info"></div>
+<hr>
+举报的id：<input type="text" id="reportId"><br>
+理由：<input type="text" id="argument"><br>
+<button type="button" onclick="reportImg()">举报</button>
+<hr>
+相册的id：<input type="text" id="getId"><br>
+<button type="button" onclick="getImg()">获取相册里的图片</button>
+<button type="button" onclick="getImgFolder()">获取用户的相册</button>
 </body>
 </html>

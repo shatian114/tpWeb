@@ -5,8 +5,8 @@ create table user (
 	#用户的组id，默认为1
 	gid smallint unsigned not null default 1,
 	name varchar(30),
-	remarkName varchar(30),
-	password char(20),
+	remarkName varchar(30) not null default '',
+	password char(40),
 	#用户的积分
 	fraction int unsigned not null default 0,
 	#用户头像的url
@@ -14,36 +14,54 @@ create table user (
 	#性别
 	sex char(1) not null default 'n',
 	#地址
-	address text,
+	address text not null default '',
 	#身份证号
-	identityNum char(18),
+	identityNum char(18) not null default '',
+	#身份证号验证
+	identityNumVerify char(1) not null default '0',
 	#手机号
-	mobilePhone char(11),
+	mobilePhone char(11) not null default '',
 	#手机号验证
 	mobilePhoneVerify char(1) not null default '0',
 	#出生日期
 	bornDate date,
 	#年级
-	classNum varchar(1) not null default '1'
+	classNum varchar(1) not null default '1',
+	#是否禁止使用本用户，1为禁止
+	forbid char(1) not null default '0',
+	alipay varchar(255) not null default '',
+	#相册个数
+	imgFolderNum int not null default 0
 );
 
-#图片信息的表
+#图片的表
 create table imgInfo (
-	#图片的id
-	id int unsigned,
-	#图片上传者的id
-	uid int unsigned,
-	#图片相册的id
-	imgFolderId int unsigned,
-	#图片的url
-	url varchar(200),
-	#图片的tag
-	tag varchar(255),
-	#图片的说明
-	explanation text
+	#图片编号
+	id varchar(255),
+	url varchar(255),
+	tag text,
+	title varchar(255),
+	#图片说明
+	explanation text,
+	#是否是封面，1为是
+	titlePage char(1) not null default '0',
+	width smallint,
+	height smallint,
+	imgDate date,
+	imgTime time,
+	#所用工具
+	tool varchar(255),
+	#所用修改的软件
+	software varchar(255),
+	#备注
+	remark varchar(255),
+	#图片的pv量
+	pvNum bigint not null default 0,
+	forbid char(1) not null default "0",
+	recommend char(1) not null default "0"
 );
 
-#用户直接相互关系的表，如关注，粉丝
+#用户相互关系的表，如关注，粉丝
 create table userRelation (
 	#粉丝的id
 	fId int unsigned,
@@ -51,4 +69,29 @@ create table userRelation (
 	gId int unsigned,
 	#关系,0为关注，为好友
 	relation char(1)
+);
+
+#举报的表
+create table reportTable (
+	#图片的id
+	id varchar(255),
+	#举报者的id
+	uid varchar(255),
+	#举报的理由
+	argument text,
+	reportDate date,
+	reportTime time
+);
+
+#创建相册表
+create table imgFolderInfo (
+	id varchar(255) primary key,
+	name varchar(255),
+	tag varchar(255),
+	explanation text,
+	createDate date,
+	createTime time,
+	imgNum bigint not null default 0,
+	pvNum bigint not null default 0,
+	recommend char(1) not null default '0'
 );

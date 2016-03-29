@@ -1,5 +1,6 @@
 ## 用户类
 这个类的父路径为userManager，所有这个类下面的接口在ajax的路径前面都是`userManager`，如注册的接口是`regist.php`，则ajax的url参数为`/userManager/regist.php`。
+
 ### 注册(regist.php)
 #### up
 * name:用户名
@@ -142,3 +143,9 @@
 #### return
 * 0、1如概述
 * 减少失败(积分数不够)
+
+### 禁止用户(forbidUser.php)
+#### up
+* id：需要禁止的用户的id
+#### return
+* 0、1如概述
