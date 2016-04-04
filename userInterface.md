@@ -136,7 +136,7 @@
 * 0、1如概述
 * 2：添加失败
 
-### 减少积分(addFraction.php)
+### 减少积分(cutFraction.php)
 #### up
 * fractionNum：需要减少的积分数
 
