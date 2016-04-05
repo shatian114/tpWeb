@@ -6,6 +6,8 @@ create table user (
 	gid smallint unsigned not null default 1,
 	name varchar(30),
 	remarkName varchar(30) not null default '',
+	nickName varchar(30) not null default '',
+	realName varchar(30) not null default '',
 	password char(40),
 	#用户的积分
 	fraction int unsigned not null default 0,
@@ -31,7 +33,11 @@ create table user (
 	forbid char(1) not null default '0',
 	alipay varchar(255) not null default '',
 	#相册个数
-	imgFolderNum int not null default 0
+	imgFolderNum int unsigned not null default 0,
+	#签到总数
+	checkInSum int unsigned not null default 0,
+	#连续签到数
+	checkInContinousSum int unsigned not null default 0
 );
 
 #图片的表

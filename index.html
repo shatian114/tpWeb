@@ -25,10 +25,12 @@
 	//登陆
 	function login(){
 		$.post('/userManager/login.php', {
-			name: $("#name").val(),
+			loginType: $("#loginType").val(),
+			loginStr: $("#name").val(),
 			password: $("#password").val()
 		}, function(info){
 			alert(info);
+			getUserData();
 		});
 	}
 	function logout(){
@@ -39,7 +41,11 @@
 	}
 	function getUserData(){
 		$.post('/userManager/getUserData.php', {
+			searchType: $("#loginType").val(),
+			searchStr: $("#name").val()
 		}, function(info){
+			/*info = $.parseJSON(info);
+			alert(info.nickName);*/
 			alert(info);
 		});
 	}
@@ -60,6 +66,18 @@
 	}
 	function checkIn(){
 		$.post('/userManager/checkIn.php', {
+		}, function(info){
+			alert(info);
+		});
+	}
+	function getCheckInSum(){
+		$.post('/userManager/getCheckInSum.php', {
+		}, function(info){
+			alert(info);
+		});
+	}
+	function getCheckInContinousSum(){
+		$.post('/userManager/getCheckInContinousSum.php', {
 		}, function(info){
 			alert(info);
 		});
@@ -107,7 +125,9 @@
 			address: $("#address").val(),
 			identityNum: $("#identityNum").val(),
 			mobilePhone: $("#mobilePhone").val(),
-			bornDate: $("#bornDate").val()
+			bornDate: $("#bornDate").val(),
+			realName: $("#realName").val(),
+			nickName: $("#nickName").val()
 		}, function(info){
 			alert(info);
 		});
@@ -230,10 +250,18 @@
 			alert(info);
 		});
 	}
+	function getImgForId(){
+		$.post('/imgManager/getImgForId.php', {
+			imgId: $("#imgId").val()
+		}, function(info){
+			alert(info);
+		});
+	}
 	</script>
 </head>
 <body>
 <h1>注册</h1>
+登陆方式：<input type="text" id="loginType" /><br>
 用户名：<input type="text" id="name" /><br>
 密码：<input type="password" id="password" /><br>
 积分：<input type="text" id="fraction" /><br>
@@ -245,6 +273,8 @@
 <button type="button" onclick="attention()">关注</button>
 <button type="button" onclick="noAttention()">取消关注</button>
 <button type="button" onclick="checkIn()">签到</button>
+<button type="button" onclick="getCheckInSum()">获取签到总数</button>
+<button type="button" onclick="getCheckInContinousSum()">获取连续签到总数</button>
 <button type="button" onclick="listFriend()">好友</button>
 <button type="button" onclick="listFans()">粉丝</button>
 <button type="button" onclick="listGz()">关注的人</button>
@@ -256,10 +286,12 @@
 <br>
 <button type="button" onclick="upHeaderImgUrl()">上传头像</button>
 <hr>
+昵称：<input type="text" id="nickName" /><br>
 备注昵称：<input type="text" id="remarkName" /><br>
 头像url：<input type="text" id="headerImgUrl" /><br>
 性别：<input type="text" id="sex" /><br>
 地址：<input type="text" id="address" /><br>
+真是姓名：<input type="text" id="realName" /><br>
 身份证号：<input type="text" id="identityNum" /><br>
 手机号：<input type="text" id="mobilePhone" /><br>
 出生日期：<input type="text" id="bornDate" /><br>
@@ -318,5 +350,8 @@ tag内容：<input type="text" id="tag"><br>
 相册的id：<input type="text" id="getId"><br>
 <button type="button" onclick="getImg()">获取相册里的图片</button>
 <button type="button" onclick="getImgFolder()">获取用户的相册</button>
+<hr>
+<input type="text" id="imgId">
+<button type="button" onclick="getImgForId()">根据id获取图片</button>
 </body>
 </html>

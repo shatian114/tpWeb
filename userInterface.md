@@ -12,6 +12,10 @@
 
 ### 登陆(login.php)
 #### up
+* loginType：登陆方式，可以有一下几种
+	* name：用户名
+	* identity：身份证
+	* mobilePhone：手机号
 * name:用户名
 * password: 密码(在前端将密码加密再传过来)
 
@@ -34,16 +38,28 @@
 #### return
 * 0、1如概述
 
-### 获取登陆的用户详细信息(getUserData.php)
+### 根据查询类型查询用户信息(getUserData.php)
 #### up
-* 无需上传参数
+* searchType：查询的类型，可以为以下几种
+	* name：用户名
+	* remarkName：别名
+	* nickName：昵称
+	* realName：真实姓名
+	* uid：用户的id
+	* identity：身份证号
+	* mobilePhone：手机号
+	* alipay：支付宝
 
 #### return
+* 0：如概述
+* 2：无此用户
 * 返回json
 	* id：用户在数据表里的id，为递增模式
 	* gid：用户的用户组id，1为bloom用户组，2为weed用户组
 	* name：用户名
 	* remarkName：别名
+	* nickname：昵称
+	* realName：真实姓名
 	* fraction：积分
 	* headerImgUrl：用户头像的url
 	* sex：性别(n为未知，w为女，m为男)
@@ -61,9 +77,11 @@
 #### up
 * json格式
 	* remarkName：别名
+	* nickName：昵称
 	* headerImgUrl：用户头像的url
 	* sex：性别(n为未知，w为女，m为男)
 	* address：地址
+	* realName：真实姓名
 	* identityNum：身份证号
 	* mobilePhone：手机号
 	* bornDate：出生日期
@@ -128,6 +146,20 @@
 #### return
 * 0、1如概述
 
+### 获取签到累计数(getCheckInSum.php)
+#### up
+* 无需上传
+
+#### return
+* 签到的累计数
+
+### 获取连续签到数(getCheckContinousInSum.php)
+#### up
+* 无需上传
+
+#### return
+* 连续的签到数
+
 ### 增加积分(addFraction.php)
 #### up
 * fractionNum：需要增加的积分数
@@ -144,8 +176,11 @@
 * 0、1如概述
 * 减少失败(积分数不够)
 
-### 禁止用户(forbidUser.php)
+### 禁止、删除用户(operateUser.php)
 #### up
+* operateType：操作类型，可以为以下两种
+	* delete：删除
+	* forbid：禁止
 * id：需要禁止的用户的id
 #### return
 * 0、1如概述

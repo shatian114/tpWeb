@@ -70,7 +70,16 @@
 
 #### return
 * 0：如概述
-* json格式的图片(类型如上传图片的json格式一样)
+* json格式的图片信息(类型如上传图片的json格式一样)
+
+### 根据编码获取图片(getImgForId.php)
+#### up
+* imgId：图片的编码(也是图片的id)
+
+#### return
+* 0：如概述
+* 2：无此编码
+* json格式的图片信息(类型如上传图片的json格式一样)
 
 ### 获取用户的相册(getImgFolder.php)
 #### up
