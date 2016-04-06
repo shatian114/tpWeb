@@ -5,9 +5,6 @@ if(isset($_POST['searchType']) && isset($_POST['searchStr'])){
 		case 'uid':
 			$result = $db->query('select * from user where id='.$_POST['searchStr']);
 			break;
-		case 'name':
-			$result = $db->query('select * from user where name="'.$_POST['searchStr'].'"');
-			break;
 		case 'nickName':
 			$result = $db->query('select * from user where nickName="'.$_POST['searchStr'].'"');
 			break;
@@ -25,6 +22,9 @@ if(isset($_POST['searchType']) && isset($_POST['searchStr'])){
 			break;
 		case 'alipay':
 			$result = $db->query('select * from user where alipay="'.$_POST['searchStr'].'"');
+			break;
+		default:
+			$result = $db->query('select * from user where name="'.$_POST['searchStr'].'"');
 			break;
 	}
 	if($result->num_rows > 0){

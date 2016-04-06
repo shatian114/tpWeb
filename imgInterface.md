@@ -1,5 +1,5 @@
 ## 图片相册类
-这个类的父路径为imgManager，所有这个类下面的接口在ajax的路径前面都是`imgManager`，如注册的接口是`createImgFolder.php`，则ajax的url参数为`/imgManager/createImgFolder.php`。
+这个类的父路径为imgManager，所有这个类下面的接口在ajax的路径前面都是`imgManager`，如创建相册的接口是`createImgFolder.php`，则ajax的url参数为`/imgManager/createImgFolder.php`。
 ### 创建相册(createImgFolder.php)
 #### up
 * imgFolderName:相册名
@@ -45,7 +45,9 @@
 * 0：如概述
 * json格式的图片信息
  * imgNum：图片的数量
- * imgArr：图片信息的数组
+ * imgArr：图片信息的数组(包括以下两项)
+ 	* reportUid：已空格分开的举报此图片的用户的id
+ 	* reportInfo：本图片的举报内容
 
 ### 获取有相同tag的相册(sameTagImgFolder.php)
 #### up
@@ -55,7 +57,9 @@
 * 0：如概述
 * json格式的相册信息
  * imgNum：相册的数量
- * imgArr：相册信息的数组
+ * imgArr：相册信息的数组(包括以下两项)
+ 	* reportUid：已空格分开的举报此图片的用户的id
+ 	* reportInfo：本图片的举报内容
 
 ### 收藏(collect.php)
 #### up
@@ -93,7 +97,22 @@
 
 ### 举报图片(reportImg.php)
 #### up
-* id：需要举报的图片的id
+* reportId：需要举报的图片的id
+* reportInfo：举报的内容
+
+#### return
+* 0、1：如概述
+* 2：本id不存在
+* 3：本图片的举报信息未处理
+* 4：图片举报的次数已达到5次，不能举报
+* 5：此用户已举报过本图片，不能举报
+
+### 处理举报的图片(operateReport.php)
+#### up
+* imgId：需要处理的图片的id
+* operateType：处理的类型
+	* 1：删除图片
+	* 2：消除举报
 
 #### return
 * 0、1：如概述

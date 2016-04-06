@@ -65,6 +65,9 @@ create table imgInfo (
 	pvNum bigint not null default 0,
 	forbid char(1) not null default "0",
 	recommend char(1) not null default "0"
+	#举报者的id记录串，五个为上限，空格隔开
+	reportUid varchar(255) not null default '',
+	reportInfo text not null default ''
 );
 
 #用户相互关系的表，如关注，粉丝
@@ -99,5 +102,6 @@ create table imgFolderInfo (
 	createTime time,
 	imgNum bigint not null default 0,
 	pvNum bigint not null default 0,
-	recommend char(1) not null default '0'
+	recommend char(1) not null default '0',
+	imgIdStr text
 );

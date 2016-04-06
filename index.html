@@ -230,7 +230,7 @@
 	function reportImg(){
 		$.post('/imgManager/reportImg.php', {
 			reportId: $("#reportId").val(),
-			argument: $("#argument").val()
+			reportInfo: $("#reportInfo").val()
 		}, function(info){
 			alert(info);
 			//$("#info").text(info);
@@ -257,6 +257,35 @@
 			alert(info);
 		});
 	}
+	function operateReport(){
+		$.post('/imgManager/operateReport.php', {
+			imgId: $("#loginType").val(),
+			operateType: $("#name").val()
+		}, function(info){
+			alert(info);
+		});
+	}
+	function setSiteTitle(){
+		$.post('/siteManager/setSiteTitle.php', {
+			siteTitle: $("#loginType").val()
+		}, function(info){
+			alert(info);
+		});
+	}
+	function setSiteSeo(){
+		$.post('/siteManager/setSiteSeo.php', {
+			siteSeo: $("#loginType").val()
+		}, function(info){
+			alert(info);
+		});
+	}
+	function setSiteStop(){
+		$.post('/siteManager/setSiteStop.php', {
+			siteStop: $("#loginType").val()
+		}, function(info){
+			alert(info);
+		});
+	}
 	</script>
 </head>
 <body>
@@ -272,19 +301,28 @@
 <button type="button" onclick="getUserData()">显示已登陆的用户</button>
 <button type="button" onclick="attention()">关注</button>
 <button type="button" onclick="noAttention()">取消关注</button>
+<br>
 <button type="button" onclick="checkIn()">签到</button>
 <button type="button" onclick="getCheckInSum()">获取签到总数</button>
 <button type="button" onclick="getCheckInContinousSum()">获取连续签到总数</button>
+<br>
 <button type="button" onclick="listFriend()">好友</button>
 <button type="button" onclick="listFans()">粉丝</button>
 <button type="button" onclick="listGz()">关注的人</button>
+<br>
 <button type="button" onclick="searchUser()">查找用户</button>
 <button type="button" onclick="forbidUser()">禁止用户</button>
 <br>
 <button type="button" onclick="addFraction()">增加积分</button>
 <button type="button" onclick="cutFraction()">减积分</button>
 <br>
-<button type="button" onclick="upHeaderImgUrl()">上传头像</button>
+<button type="button" onclick="operateReport()">处理举报</button>
+<hr>
+<button type="button" onclick="setSiteTitle()">设置网站标题</button>
+<hr>
+<button type="button" onclick="setSiteSeo()">设置网站seo</button>
+<hr>
+<button type="button" onclick="setSiteStop()">设置网站关闭</button>
 <hr>
 昵称：<input type="text" id="nickName" /><br>
 备注昵称：<input type="text" id="remarkName" /><br>
@@ -344,7 +382,7 @@ tag内容：<input type="text" id="tag"><br>
 <div id="info"></div>
 <hr>
 举报的id：<input type="text" id="reportId"><br>
-理由：<input type="text" id="argument"><br>
+理由：<input type="text" id="reportInfo"><br>
 <button type="button" onclick="reportImg()">举报</button>
 <hr>
 相册的id：<input type="text" id="getId"><br>
