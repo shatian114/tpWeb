@@ -74,6 +74,7 @@
 
 #### return
 * 0：如概述
+* 2：无此相册
 * json格式的图片信息(类型如上传图片的json格式一样)
 
 ### 根据编码获取图片(getImgForId.php)
@@ -116,3 +117,29 @@
 
 #### return
 * 0、1：如概述
+
+### 对图片进行评论(imgReview.php)
+#### up
+* imgId：需要评论的图片的id
+* content：评论的内容
+* replyId：这个评论如果是对其他评论的回复，这里则是需要回复的评论的id，如果不是回复其他评论，则为0
+
+#### return
+* 0、1：如概述
+
+### 获取图片的评论(getImgReview.php)
+#### up
+* imgId：需要评论的图片的id
+
+#### return
+* 0：如概述
+* 2：无此图片
+* json格式的图片评论信息
+	* reviewNum：评论的数量
+	* reviewArr：评论信息的数组，数组的每个元素都是一个json格式的评论信息，格式如下
+		* id：评论的id，递增的
+		* content：评论的内容
+		* replyId：为0的话，是对图片的直接评论;非0则代表是对这个id的评论的回复
+		* reviewDate：评论日期
+		* reviewTime：评论时间
+		* reviewUid：评论的人的id

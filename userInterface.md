@@ -184,3 +184,42 @@
 * id：需要禁止的用户的id
 #### return
 * 0、1如概述
+
+### 查找用户的唯一资料是否存在(isExists.php)
+#### up
+* searchType：查找类型，可以为以下四种
+	* name：用户名
+	* mobilePhone：手机号
+	* identity：身份证号
+	* alipay：支付宝号
+* seatchStr：查找的值
+#### return
+* 0：如概述
+* 1：存在
+* 2：不存在
+
+### 给用户推送官方信息(sendMsg.php)
+#### up
+* uid：接收信息的用户的id
+* msgContent：信息的内容
+#### return
+* 0、1：如概述
+
+### 获取用户的信息(getMsg.php)
+#### up
+* msgType：信息的类型，可以为以下3种
+	* 1：评论信息
+	* 2：被关注和被取消关注的信息
+	* 3：官方推送的信息
+#### return
+* 0：如概述
+* json格式的信息
+	* msgNum：信息的数量
+	* msgArr：信息的数组，每个元素为一个信息的json格式
+		* id：信息的id，可能是不连续的
+		* msgType：信息的类型
+		* msgContent：信息的内容（如果信息类型为关注，则1为被关注，2为被取消关注;如果信息类型为评论，则内容为评论的id；如果信息类型为推送信息，则为推送的内容）
+		* fromUid：发送信息的人的id
+		* msgDate：信息接收日期
+		* msgTime：信息接收时间
+		* msgRead：信息的读取状态，0为未读取

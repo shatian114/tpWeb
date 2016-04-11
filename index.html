@@ -286,6 +286,38 @@
 			alert(info);
 		});
 	}
+	function isExists(){
+		$.post('/userManager/isExists.php', {
+			searchType: $("#loginType").val(),
+			searchStr: $("#name").val()
+		}, function(info){
+			alert(info);
+		});
+	}
+	function imgReview(){
+		$.post('/imgManager/imgReview.php', {
+			imgId: $("#loginType").val(),
+			content: $("#name").val(),
+			replyId: '1'
+		}, function(info){
+			alert(info);
+		});
+	}
+	function getImgReview(){
+		$.post('/imgManager/getImgReview.php', {
+			imgId: $("#loginType").val()
+		}, function(info){
+			alert(info);
+		});
+	}
+	function sendMsg(){
+		$.post('/userManager/sendMsg.php', {
+			uid: $("#loginType").val(),
+			msgContent: $("#name").val()
+		}, function(info){
+			alert(info);
+		});
+	}
 	</script>
 </head>
 <body>
@@ -323,6 +355,14 @@
 <button type="button" onclick="setSiteSeo()">设置网站seo</button>
 <hr>
 <button type="button" onclick="setSiteStop()">设置网站关闭</button>
+<hr>
+<button type="button" onclick="isExists()">是否存在</button>
+<hr>
+<button type="button" onclick="imgReview()">评论图片</button>
+<hr>
+<button type="button" onclick="getImgReview()">获取评论图片</button>
+<hr>
+<button type="button" onclick="sendMsg()">给用户推送信息</button>
 <hr>
 昵称：<input type="text" id="nickName" /><br>
 备注昵称：<input type="text" id="remarkName" /><br>

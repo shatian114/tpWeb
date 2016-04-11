@@ -13,6 +13,8 @@ if(isset($_SESSION['uid']) && isset($_SESSION['name'])){
 		echo '2';
 		$db->query('insert into userRelation (fId, gId, relation) values('.$_SESSION['uid'].', '.$bId.', "0")');
 	}
+	//给被关注的人发送信息，内容为1，说明是被关注了，
+	$db->query('insert into msg'.$bId.'(msgType, msgContent, fromUid, msgDate, msgTime) values("2", "1", '.$_SESSION['uid'].', curdate(), curtime())');
 }else{
 	echo '0';
 }

@@ -4,6 +4,8 @@ if(isset($_SESSION['uid']) && isset($_POST['name'])){
 	//查找被关注的用户的id
 	$result = $db->query('select id from user where name="'.$_POST['name'].'"')->fetch_assoc();
 	$bId = $result['id'];
+	//给被取消关注的人发送信息，内容为2，说明是被取消关注了，
+	$db->query('insert into msg'.$bId.'(msgType, msgContent, fromUid, msgDate, msgTime) values("2", "2", '.$_SESSION['uid'].', curdate(), curtime())');
 	//如果不是好友，只是粉丝，则删除记录
 	$result = $db->query('select * from userRelation where fId='.$_SESSION['uid'].' and gId='.$bId.' and relation="0"');
 	if($result->num_rows > 0){

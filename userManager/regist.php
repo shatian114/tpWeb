@@ -16,6 +16,8 @@ if(isset($_POST['name']) && isset($_POST['password'])){
 		$db->query('create table checkIn'.$uid.'(checkInDate date, checkInTime time, continuousNum int unsigned)');
 		//创建积分信息表
 		$db->query('create table fraction'.$uid.'(fractionDate date, fractionTime time, info text)');
+		//创建消息表
+		$db->query('create table msg'.$uid.'(id bigint unsigned auto_increment primary key, msgType char(1), msgContent text, fromUid bigint unsigned, msgDate date, msgTime time, msgRead char(1) not null default "0")');
 		echo '1';
 	}
 }else{
