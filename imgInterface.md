@@ -143,3 +143,19 @@
 		* reviewDate：评论日期
 		* reviewTime：评论时间
 		* reviewUid：评论的人的id
+
+### 删除相册(delImgFolder.php)
+#### up
+* imgFolderId：需要删除的相册的id(只能删除本用户的相册)
+
+#### return
+* 0、1：如概述
+* 2：本相册不属于本用户
+
+### 删除图片(delImg.php)
+#### up
+* imgId：需要删除的图片的id(只能删除本用户的图片)
+
+#### return
+* 0、1：如概述
+* 2：本图片不属于本用户

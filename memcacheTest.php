@@ -2,6 +2,8 @@
 /*$mem = memcache_connect('localhost', 11211);
 memcache_add($mem, 'name', 'peng', false, 0);
 var_dump(memcache_get($mem, 'name'));*/
-$str = '1_0_0';
-echo (explode('_', $str))[0];
+$imgFolderIdStr = '1,2,3';
+$imgFolderIdArr = array(1,2,3);
+$imgFolderIdStr .= ','.($imgFolderIdArr[count($imgFolderIdArr)-1]+1);
+echo $imgFolderIdStr;
 ?>

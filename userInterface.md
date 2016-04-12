@@ -221,9 +221,33 @@
 	* msgNum：信息的数量
 	* msgArr：信息的数组，每个元素为一个信息的json格式
 		* id：信息的id，可能是不连续的
-		* msgType：信息的类型
+		* msgType：信息的类型(同上)
 		* msgContent：信息的内容（如果信息类型为关注，则1为被关注，2为被取消关注;如果信息类型为评论，则内容为评论的id；如果信息类型为推送信息，则为推送的内容）
 		* fromUid：发送信息的人的id
 		* msgDate：信息接收日期
 		* msgTime：信息接收时间
 		* msgRead：信息的读取状态，0为未读取
+
+### 设置用户为推荐画师(setRecommend.php)
+#### up
+* uid：画师的uid
+
+#### return
+* 0、1：如概述
+
+### 取消推荐画师(setNoRecommend.php)
+#### up
+* uid：画师的uid
+
+#### return
+* 0、1：如概述
+
+### 获取推荐画师(getRecommend.php)
+#### up
+* 无需上传
+
+#### return
+* 0：如概述
+* json格式
+	* recommendNum：推荐画师的个数
+	* recommendArr：推荐画师的信息的数组，元素为json格式的画师的详细信息（信息同查询用户信息返回的json格式）

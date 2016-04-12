@@ -34,10 +34,14 @@ create table user (
 	alipay varchar(255) not null default '',
 	#相册个数
 	imgFolderNum int unsigned not null default 0,
+	#相册的id的字符串记录
+	imgFolderIdStr text not null default '',
 	#签到总数
 	checkInSum int unsigned not null default 0,
 	#连续签到数
-	checkInContinousSum int unsigned not null default 0
+	checkInContinousSum int unsigned not null default 0,
+	#是否推荐，推荐则为1
+	recommend char(1) not null default '';
 );
 
 #图片的表
@@ -64,7 +68,6 @@ create table imgInfo (
 	#图片的pv量
 	pvNum bigint not null default 0,
 	forbid char(1) not null default "0",
-	recommend char(1) not null default "0"
 	#举报者的id记录串，五个为上限，空格隔开
 	reportUid varchar(255) not null default '',
 	reportInfo text not null default ''
@@ -103,5 +106,5 @@ create table imgFolderInfo (
 	imgNum bigint not null default 0,
 	pvNum bigint not null default 0,
 	recommend char(1) not null default '0',
-	imgIdStr text
+	imgIdStr text not null default ''
 );

@@ -152,7 +152,7 @@
 	function upImg(){
 		$.post('/imgManager/upImg.php', {
 			imgNum: '2',
-			imgFolderId: '1_0',
+			imgFolderId: '1_1',
 			imgJson: {
 				'0':{
 					imgTag: $("#imgTag").val(),
@@ -318,6 +318,40 @@
 			alert(info);
 		});
 	}
+	function setRecommend(){
+		$.post('/userManager/setRecommend.php', {
+			uid: $("#loginType").val()
+		}, function(info){
+			alert(info);
+		});
+	}
+	function setNoRecommend(){
+		$.post('/userManager/setNoRecommend.php', {
+			uid: $("#loginType").val()
+		}, function(info){
+			alert(info);
+		});
+	}
+	function getRecommend(){
+		$.post('/userManager/getRecommend.php', {
+		}, function(info){
+			alert(info);
+		});
+	}
+	function delImgFolder(){
+		$.post('/imgManager/delImgFolder.php', {
+			imgFolderId: $("#loginType").val()
+		}, function(info){
+			alert(info);
+		});
+	}
+	function delImg(){
+		$.post('/imgManager/delImg.php', {
+			imgId: $("#loginType").val()
+		}, function(info){
+			alert(info);
+		});
+	}
 	</script>
 </head>
 <body>
@@ -363,6 +397,15 @@
 <button type="button" onclick="getImgReview()">获取评论图片</button>
 <hr>
 <button type="button" onclick="sendMsg()">给用户推送信息</button>
+<hr>
+<button type="button" onclick="setRecommend()">设置推荐</button>
+<button type="button" onclick="setNoRecommend()">取消推荐</button>
+<hr>
+<button type="button" onclick="getRecommend()">获取推荐用户的信息</button>
+<hr>
+<button type="button" onclick="delImgFolder()">删除相册</button>
+<hr>
+<button type="button" onclick="delImg()">删除图片</button>
 <hr>
 昵称：<input type="text" id="nickName" /><br>
 备注昵称：<input type="text" id="remarkName" /><br>
