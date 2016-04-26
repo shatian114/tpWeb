@@ -31,11 +31,54 @@
 ### 添加tag(addTag.php)
 #### up
 * addId：要添加tag的id(图片或相册的id)
-* tag：以空格分开的字符串
+* tag：tag（字符串形式，每次只能添加一个，不能包含空格）
+* tagType：需要添加tag的类型，图片或相册，以下两个值
+	* imgInfo：图片
+	* imgFolderInfo：相册
 
 #### return
 * 0、1如概述
 * 2：tag数量超过8个，添加失败
+* 3：本tag已经有了，不能重复添加
+
+### 删除tag(delTag.php)
+#### up
+* delId：要添加tag的id(图片或相册的id)
+* tag：tag（字符串形式，每次只能添加一个，不能包含空格）
+* tagType：需要添加tag的类型，图片或相册，以下两个值
+	* imgInfo：图片
+	* imgFolderInfo：相册
+
+#### return
+* 0、1如概述
+* 2：无此图片或tag
+
+### 给tag点赞(tagToLike.php)
+#### up
+* imgId：要点赞的tag所属的id(图片或相册的id)
+* tag：tag（字符串形式，每次只能点赞一个，不能包含空格）
+* tagType：需要点赞的tag的类型，图片或相册，以下两个值
+	* imgInfo：图片
+	* imgFolderInfo：相册
+
+#### return
+* 0、1如概述
+* 2：没有此图片或相册或tag
+* 3：点赞总量已超100
+* 4：本用户已点赞
+
+### 取消tag的点赞(tagNoLike.php)
+#### up
+* imgId：要取消点赞的tag所属的id(图片或相册的id)
+* tag：tag（字符串形式，每次只能点赞一个，不能包含空格）
+* tagType：需要取消点赞的tag的类型，图片或相册，以下两个值
+	* imgInfo：图片
+	* imgFolderInfo：相册
+
+#### return
+* 0、1如概述
+* 2：没有此图片或相册或tag
+* 3：点赞数已为0或本用户未点赞
 
 ### 获取有相同tag的图片(sameTagImg.php)
 #### up

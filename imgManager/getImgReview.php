@@ -1,4 +1,5 @@
 <?php
+//根据图片的id获取图片的评论
 require_once '../dbInterface.php';
 if(isset($_POST['imgId'])){
 	$result = $db->query('select * from review'.$_POST['imgId']);

@@ -30,7 +30,8 @@ if(isset($_POST['searchType']) && isset($_POST['searchStr'])){
 	if($result->num_rows > 0){
 		$result = $result->fetch_assoc();
 		unset($result['password']);
-		echo json_encode($result);
+		//echo json_encode($result);
+		echo 'uid:'.$_SESSION['uid'];
 	}else{
 		echo '2';
 	}

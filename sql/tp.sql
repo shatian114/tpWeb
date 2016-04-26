@@ -41,7 +41,9 @@ create table user (
 	#连续签到数
 	checkInContinousSum int unsigned not null default 0,
 	#是否推荐，推荐则为1
-	recommend char(1) not null default '';
+	recommend char(1) not null default '',
+	#图片浏览次数的总和
+	imgGetCount bigint unsigned not null default 0
 );
 
 #图片的表
@@ -70,7 +72,11 @@ create table imgInfo (
 	forbid char(1) not null default "0",
 	#举报者的id记录串，五个为上限，空格隔开
 	reportUid varchar(255) not null default '',
-	reportInfo text not null default ''
+	reportInfo text not null default '',
+	#tag点赞的数量
+	tagLikeNumStr varchar(31) not null default '',
+	#给tag点赞的人的id的字符串
+	tagUidStr text not null default ''
 );
 
 #用户相互关系的表，如关注，粉丝
@@ -106,5 +112,18 @@ create table imgFolderInfo (
 	imgNum bigint not null default 0,
 	pvNum bigint not null default 0,
 	recommend char(1) not null default '0',
-	imgIdStr text not null default ''
+	imgIdStr text not null default '',
+	#tag点赞的数量
+	tagLikeNumStr varchar(31) not null default '',
+	#给tag点赞的人的id的字符串
+	tagUidStr text not null default ''
+);
+
+#用户给tag点赞的记录
+create table tagLike (
+	uid bigint unsigned primary key,
+	imgId varchar(255),
+	tagIndex tinyint unsigned,
+	likeDate date,
+	likeTime time
 );

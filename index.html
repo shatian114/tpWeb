@@ -30,7 +30,12 @@
 			password: $("#password").val()
 		}, function(info){
 			alert(info);
-			getUserData();
+			viewLoginUid();
+		});
+	}
+	function viewLoginUid(){
+		$.post('/userManager/getLoginUid.php',{},function(info){
+			alert(info);
 		});
 	}
 	function logout(){
@@ -185,7 +190,17 @@
 	}
 	function addTag(){
 		$.post('/imgManager/addTag.php', {
+			tagType: $("#tagType").val(),
 			addId: $("#addId").val(),
+			tag: $("#tag").val()
+		}, function(info){
+			alert(info);
+		});
+	}
+	function delTag(){
+		$.post('/imgManager/delTag.php', {
+			tagType: $("#tagType").val(),
+			delId: $("#addId").val(),
 			tag: $("#tag").val()
 		}, function(info){
 			alert(info);
@@ -318,6 +333,13 @@
 			alert(info);
 		});
 	}
+	function sendGuestMsg(){
+		$.post('/userManager/sendGuestMsg.php', {
+			uid: $("#loginType").val()
+		}, function(info){
+			alert(info);
+		});
+	}
 	function setRecommend(){
 		$.post('/userManager/setRecommend.php', {
 			uid: $("#loginType").val()
@@ -352,6 +374,24 @@
 			alert(info);
 		});
 	}
+	function tagToLike(){
+		$.post('/imgManager/tagToLike.php', {
+			tagType: 'imgInfo',
+			imgId: $("#loginType").val(),
+			tag: $("#name").val()
+		}, function(info){
+			alert(info);
+		});
+	}
+	function tagNoLike(){
+		$.post('/imgManager/tagNoLike.php', {
+			tagType: 'imgInfo',
+			imgId: $("#loginType").val(),
+			tag: $("#name").val()
+		}, function(info){
+			alert(info);
+		});
+	}
 	</script>
 </head>
 <body>
@@ -364,7 +404,8 @@
 <button type="button" onclick="changePassword()">修改密码</button>
 <button type="button" onclick="login()">登陆</button>
 <button type="button" onclick="logout()">退出</button>
-<button type="button" onclick="getUserData()">显示已登陆的用户</button>
+<button type="button" onclick="viewLoginUid()">查看已登陆用户的id</button>
+<button type="button" onclick="getUserData()">查找用户信息</button>
 <button type="button" onclick="attention()">关注</button>
 <button type="button" onclick="noAttention()">取消关注</button>
 <br>
@@ -375,7 +416,6 @@
 <button type="button" onclick="listFriend()">好友</button>
 <button type="button" onclick="listFans()">粉丝</button>
 <button type="button" onclick="listGz()">关注的人</button>
-<br>
 <button type="button" onclick="searchUser()">查找用户</button>
 <button type="button" onclick="forbidUser()">禁止用户</button>
 <br>
@@ -385,18 +425,16 @@
 <button type="button" onclick="operateReport()">处理举报</button>
 <hr>
 <button type="button" onclick="setSiteTitle()">设置网站标题</button>
-<hr>
 <button type="button" onclick="setSiteSeo()">设置网站seo</button>
-<hr>
 <button type="button" onclick="setSiteStop()">设置网站关闭</button>
 <hr>
 <button type="button" onclick="isExists()">是否存在</button>
 <hr>
 <button type="button" onclick="imgReview()">评论图片</button>
-<hr>
 <button type="button" onclick="getImgReview()">获取评论图片</button>
 <hr>
 <button type="button" onclick="sendMsg()">给用户推送信息</button>
+<button type="button" onclick="sendGuestMsg()">推送访客信息</button>
 <hr>
 <button type="button" onclick="setRecommend()">设置推荐</button>
 <button type="button" onclick="setNoRecommend()">取消推荐</button>
@@ -404,8 +442,10 @@
 <button type="button" onclick="getRecommend()">获取推荐用户的信息</button>
 <hr>
 <button type="button" onclick="delImgFolder()">删除相册</button>
-<hr>
 <button type="button" onclick="delImg()">删除图片</button>
+<hr>
+<button type="button" onclick="tagToLike()">给tag点赞</button>
+<button type="button" onclick="tagNoLike()">取消tag赞</button>
 <hr>
 昵称：<input type="text" id="nickName" /><br>
 备注昵称：<input type="text" id="remarkName" /><br>
@@ -424,7 +464,6 @@
 相册说明：<input type="text" id="imgFolderExplanation" /><br>
 <button type="button" onclick="createImgFolder()">提交相册名</button>
 <hr>
-相册名：<input type="text" id="upImgFolderName" /><br>
 照片url：<input type="text" id="imgUrl" /><br>
 标题：<input type="text" id="imgTitle" /><br>
 照片tag：<input type="text" id="imgTag" /><br>
@@ -435,8 +474,7 @@
 软件：<input type="text" id="software" /><br>
 工具：<input type="text" id="tool" /><br>
 注释：<input type="text" id="remark" /><br>
-<hr>
-相册名：<input type="text" id="upImgFolderName2" /><br>
+<hr>s
 照片url：<input type="text" id="imgUrl2" /><br>
 标题：<input type="text" id="imgTitle2" /><br>
 照片tag：<input type="text" id="imgTag2" /><br>
@@ -449,9 +487,11 @@
 注释：<input type="text" id="remark2" /><br>
 <button type="button" onclick="upImg()">提交照片</button>
 <hr>
+要添加的tag的类型：<input type="text" id="tagType"><br>
 要添加的id：<input type="text" id="addId"><br>
 tag内容：<input type="text" id="tag"><br>
 <button type="button" onclick="addTag()">添加tag</button>
+<button type="button" onclick="delTag()">删除tag</button>
 <hr>
 <input type="text" id="sameTag"><br>
 <button type="button" onclick="getSameTagImg()">获取相同tag图片</button>

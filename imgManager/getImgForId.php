@@ -20,6 +20,9 @@ if(isset($_POST['imgId'])){
 			memcache_set($mem, $memKey, $imgIdStr, false);
 			$db->query('update imgInfo set pvNum='.($result['pvNum']+1).' where id="'.$result['id'].'"');
 		}
+		//给图片的浏览总数加1
+		$imgIdArr = explode('_', $_POST['imgId']);
+		$db->query('update user set imgGetCount=imgGetCount+1 where id='.$imgIdArr[0]);
 	}else{
 		echo 2;
 	}

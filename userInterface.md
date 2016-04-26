@@ -55,7 +55,7 @@
 * 2：无此用户
 * 返回json
 	* id：用户在数据表里的id，为递增模式
-	* gid：用户的用户组id，1为bloom用户组，2为weed用户组
+	* gid：用户的用户组id，1为photon用户组，2为bloom用户组
 	* name：用户名
 	* remarkName：别名
 	* nickname：昵称
@@ -72,6 +72,7 @@
 	* classNum：年级
 	* forbid：用户是否被禁制(0为开放，1为禁止)
 	* alipay：用户的支付宝帐号
+	* imgGetCount：用户所有图片的浏览总和
 
 ### 更新登陆用户的详细资料(upFullData.php)
 #### up
@@ -208,12 +209,20 @@
 #### return
 * 0、1：如概述
 
+### 给用户推送访客信息(sendGuestMsg.php)
+#### up
+* uid：接收信息的用户的id
+
+#### return
+* 0、1：如概述
+
 ### 获取用户的信息(getMsg.php)
 #### up
 * msgType：信息的类型，可以为以下3种
 	* 1：评论信息
 	* 2：被关注和被取消关注的信息
 	* 3：官方推送的信息
+	* 4：访客信息
 
 #### return
 * 0：如概述
@@ -223,7 +232,7 @@
 		* id：信息的id，可能是不连续的
 		* msgType：信息的类型(同上)
 		* msgContent：信息的内容（如果信息类型为关注，则1为被关注，2为被取消关注;如果信息类型为评论，则内容为评论的id；如果信息类型为推送信息，则为推送的内容）
-		* fromUid：发送信息的人的id
+		* fromUid：发送信息的人的id(如果为访客信息，这个就是访客的id)
 		* msgDate：信息接收日期
 		* msgTime：信息接收时间
 		* msgRead：信息的读取状态，0为未读取
