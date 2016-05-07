@@ -4,9 +4,9 @@ if(isset($_SESSION['uid'])){
 	$fansList = array();
 	//查找在粉丝位置的id
 	$result = $db->query('select fId from userRelation where relation="0" and gId='.$_SESSION['uid']);
-	$fansNum = $result->num_rows;
+	$fansNum = $result->rowCount();
 	for($i=0; $i<$fansNum; $i++){
-		$row = $result->fetch_assoc();
+		$row = $result->fetch();
 		$nameCol = $db->query('select name from user where id='.$row['fId'])->fetch_assoc();
 		$fansList[$i] = $nameCol['name'];
 	}

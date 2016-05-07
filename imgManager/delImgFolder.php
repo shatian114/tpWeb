@@ -8,7 +8,7 @@ if(isset($_SESSION['uid']) && isset($_POST['imgFolderId'])){
 		//用户表里的相册数减1
 		$db->query('update user set imgFolderNum=imgFolderNum-1 where id='.$_SESSION['uid']);
 		//将本id从用户表的相册id字符串里去掉
-		$imgFolderIdStr = ($db->query('select imgFolderIdStr from user where id='.$_SESSION['uid'])->fetch_assoc())['imgFolderIdStr'];
+		$imgFolderIdStr = ($db->query('select imgFolderIdStr from user where id='.$_SESSION['uid'])->fetch())['imgFolderIdStr'];
 		$imgFolderIdStrArr = explode(',', $imgFolderIdStr);
 		$key = array_search($imgFolderIdArr[1], $imgFolderIdStrArr);
 		unset($imgFolderIdStrArr[$key]);

@@ -3,7 +3,7 @@ require_once '../dbInterface.php';
 if(isset($_SESSION['uid'])){
 	//查找昨天是否签到
 	$result = $db->query('select * from checkIn'.date('Ymd', strtotime('-1 day')).' where uId='.$_SESSION['uid']);
-	if($result->num_rows > 0){
+	if($result->rowCount() > 0){
 		//将连续签到数加1
 		$db->query('update user set checkInContinousSum = checkInContinousSum + 1');
 	}else{

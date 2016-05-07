@@ -3,8 +3,8 @@
 require_once '../dbInterface.php';
 if(isset($_SESSION['uid']) && isset($_POST['delId']) && isset($_POST['tagType']) && isset($_POST['tag'])){
 	$result = $db->query('select tag,tagLikeNumStr,tagUidStr from '.$_POST['tagType'].' where id="'.$_POST['delId'].'" and tag like "% '.$_POST['tag'].' %"');
-	if($result->num_rows > 0){
-		$result = $result->fetch_assoc();
+	if($result->rowCount() > 0){
+		$result = $result->fetch();
 		$tagArr = explode(' ', trim($result['tag']));
 		$tagLikeNumArr = explode(' ', trim($result['tagLikeNumStr']));
 		$tagUidArr = explode(' ', trim($result['tagUidStr']));

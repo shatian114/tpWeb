@@ -2,7 +2,7 @@
 require_once '../dbInterface.php';
 if(isset($_SESSION['uid']) && isset($_POST['imgFolderId']) && isset($_POST['imgJson'])){
 	//根据相册信息表里的imgIdStr算出图片的id
-	$imgIdStr = ($db->query('select imgIdStr from imgFolderInfo where id="'.$_POST['imgFolderId'].'"')->fetch_assoc())['imgIdStr'];
+	$imgIdStr = ($db->query('select imgIdStr from imgFolderInfo where id="'.$_POST['imgFolderId'].'"')->fetch())['imgIdStr'];
 	if($imgIdStr === ''){
 		$imgId = 0;
 		$imgIdStr = '0';
@@ -12,7 +12,7 @@ if(isset($_SESSION['uid']) && isset($_POST['imgFolderId']) && isset($_POST['imgJ
 		$imgIdStr .= ','.$imgId;
 	}
 	//获取相册里的图片数
-	$result = $db->query('select imgNum from imgFolderInfo where id="'.$_POST['imgFolderId'].'"')->fetch_assoc();
+	$result = $db->query('select imgNum from imgFolderInfo where id="'.$_POST['imgFolderId'].'"')->fetch();
 	$imgNum = $result['imgNum'];
 	//将图片的信息存入相应的表
 	$insertSql = 'insert into imgInfo(id, url, tag, title, explanation, titlePage, width, height, imgDate, imgTime, software, tool, remark) values("'.$_POST['imgFolderId'].'_'.$imgId.'", "'.$_POST['imgJson']['0']['imgUrl'].'", "'.$_POST['imgJson']['0']['imgTag'].'", "'.$_POST['imgJson']['0']['imgTitle'].'", "'.$_POST['imgJson']['0']['imgExplanation'].'", "'.$_POST['imgJson']['0']['imgTitlePage'].'", "'.$_POST['imgJson']['0']['imgWidth'].'", "'.$_POST['imgJson']['0']['imgHeight'].'", curdate(), curtime(),"'.$_POST['imgJson']['0']['software'].'", "'.$_POST['imgJson']['0']['tool'].'", "'.$_POST['imgJson']['0']['remark'].'")';

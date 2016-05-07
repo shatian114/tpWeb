@@ -27,8 +27,8 @@ if(isset($_POST['searchType']) && isset($_POST['searchStr'])){
 			$result = $db->query('select * from user where name="'.$_POST['searchStr'].'"');
 			break;
 	}
-	if($result->num_rows > 0){
-		$result = $result->fetch_assoc();
+	if($result->rowCount() > 0){
+		$result = $result->fetch();
 		unset($result['password']);
 		//echo json_encode($result);
 		echo 'uid:'.$_SESSION['uid'];

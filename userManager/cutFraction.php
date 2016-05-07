@@ -1,7 +1,7 @@
 <?php
 require_once '../dbInterface.php';
 if(isset($_SESSION['uid']) && isset($_POST['fractionNum'])){
-	$result = $db->query('select fraction from user where id='.$_SESSION['uid'])->fetch_assoc();
+	$result = $db->query('select fraction from user where id='.$_SESSION['uid'])->fetch();
 	$fraction = $result['fraction'];
 	if($fraction < $_POST['fractionNum']){
 		echo '2';

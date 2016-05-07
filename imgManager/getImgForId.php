@@ -2,8 +2,8 @@
 require_once '../dbInterface.php';
 if(isset($_POST['imgId'])){
 	$result = $db->query('select * from imgInfo where id="'.$_POST['imgId'].'"');
-	if($result->num_rows > 0){
-		$result = $result->fetch_assoc();
+	if($result->rowCount() > 0){
+		$result = $result->fetch();
 		echo json_encode(array('imgInfo'=>$result));
 		//查找本图片是否被本用户看过
 		$mem = memcache_connect('127.0.0.1', 11211);

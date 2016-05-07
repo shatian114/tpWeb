@@ -3,7 +3,7 @@
 require_once '../dbInterface.php';
 if(isset($_SESSION['uid']) && isset($_POST['addId']) && isset($_POST['tag']) && isset($_POST['tagType'])){
 	//查出需要添加的图片或相册的tag
-	$result = $db->query('select tag,tagLikeNumStr,tagUidStr from '.$_POST['tagType'].' where id="'.$_POST['addId'].'"')->fetch_assoc();
+	$result = $db->query('select tag,tagLikeNumStr,tagUidStr from '.$_POST['tagType'].' where id="'.$_POST['addId'].'"')->fetch();
 	$tagArr = explode(' ', trim($result['tag']));
 	$tagNum = count($tagArr);
 	if($tagNum == 8){

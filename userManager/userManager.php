@@ -5,9 +5,9 @@ switch($_POST['type']){
 	case 'searchImg':
 		$imgArr = array();
 		$result = $db->query('select * from imgInfo where id like "'.$_SESSION['uid'].'_%"');
-		$imgNum = $result->num_rows;
+		$imgNum = $result->rowCount();
 		for($i=0; $i<$imgNum; $i++){
-			$imgArr[$imgNum - $i - 1] = $result->fetch_assoc();
+			$imgArr[$imgNum - $i - 1] = $result->fetch();
 		}
 		echo json_encode($imgArr);
 	case 'reportImg':

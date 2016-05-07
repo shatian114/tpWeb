@@ -4,8 +4,8 @@ require_once '../dbInterface.php';
 if(isset($_SESSION['uid']) && isset($_POST['imgId']) && isset($_POST['tag']) && isset($_POST['tagType'])){
 	//查找是否有本图片，并且本图是否有本tag
 	$result = $db->query('select tag,tagLikeNumStr,tagUidStr from '.$_POST['tagType'].' where id="'.$_POST['imgId'].'" and tag like "% '.$_POST['tag'].' "');
-	if($result->num_rows>0){
-		$result = $result->fetch_assoc();
+	if($result->rowCount() > 0){
+		$result = $result->fetch();
 		//查找tag在数组里的索引
 		$tagIndex = array_search($_POST['tag'], explode(' ', trim($result['tag'])));
 		$tagLikeNumArr = explode(' ', $result['tagLikeNumStr']);

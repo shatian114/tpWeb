@@ -3,8 +3,8 @@ require_once '../dbInterface.php';
 if(isset($_POST['reportId']) && isset($_POST['reportInfo']) && isset($_SESSION['uid'])){
 	//查找图片的举报者的字段，是否有5个，或者有本人的id，或者上次的举报是否被处理
 	$result = $db->query('select * from imgInfo where id="'.$_POST['reportId'].'"');
-	if($result->num_rows > 0){
-		$result = $result->fetch_assoc();
+	if($result->rowCount() > 0){
+		$result = $result->fetch();
 		if($result['reportInfo'] !== ''){
 			//本图片的举报信息还在，未处理
 			echo '3';

@@ -9,7 +9,7 @@ if(isset($_SESSION['uid']) && isset($_POST['imgId'])){
 		//相册表里的图片数减1
 		$db->query('update imgFolderInfo set imgNum=imgNum-1 where id="'.$imgFolderId.'"');
 		//从相册信息表里的图片id字符串里删除图片的id
-		$imgIdStr = ($db->query('select imgIdStr from imgFolderInfo where id="'.$imgFolderId.'"')->fetch_assoc())['imgIdStr'];
+		$imgIdStr = ($db->query('select imgIdStr from imgFolderInfo where id="'.$imgFolderId.'"')->fetch())['imgIdStr'];
 		$imgIdStrArr = explode(',', $imgIdStr);
 		unset($imgIdStrArr[array_search($imgIdArr[2], $imgIdStrArr)]);
 		$imgIdStr = implode(',', $imgIdStrArr);

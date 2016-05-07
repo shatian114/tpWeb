@@ -3,8 +3,8 @@
 require_once '../dbInterface.php';
 if(isset($_SESSION['uid']) && isset($_POST['imgId']) && isset($_POST['tag']) && isset($_POST['tagType'])){
 	$result = $db->query('select tag,tagUidStr,tagLikeNumStr from '.$_POST['tagType'].' where id="'.$_POST['imgId'].'" and tag like "%'.$_POST['tag'].'%"');
-	if($result->num_rows > 0){
-		$result = $result->fetch_assoc();
+	if($result->rowCount() > 0){
+		$result = $result->fetch();
 		$tagIndex = array_search($_POST['tag'], explode(' ', trim($result['tag'])));
 		$tagLikeNumArr = explode(' ', trim($result['tagLikeNumStr']));
 		if($tagLikeNumArr[$tagIndex] != 100){

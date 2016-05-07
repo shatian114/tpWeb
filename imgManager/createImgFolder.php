@@ -3,7 +3,7 @@ require_once '../dbInterface.php';
 if(isset($_SESSION['uid']) && isset($_POST['imgFolderName']) && isset($_POST['imgFolderTag']) && isset($_POST['imgFolderExplanation'])){
 	//根据用户表里的相册字符串算出相册的id
 	$imgFolderId = '';
-	$imgFolderIdStr = ($db->query('select imgFolderIdStr from user where id='.$_SESSION['uid'])->fetch_assoc())['imgFolderIdStr'];
+	$imgFolderIdStr = ($db->query('select imgFolderIdStr from user where id='.$_SESSION['uid'])->fetch())['imgFolderIdStr'];
 	if($imgFolderIdStr === ''){
 		$imgFolderIdStr = '0';
 		$imgFolderId= '0';
@@ -13,7 +13,7 @@ if(isset($_SESSION['uid']) && isset($_POST['imgFolderName']) && isset($_POST['im
 		$imgFolderIdStr .= ','.$imgFolderId;
 	}
 	//查找相册个数，来设置相册id
-	$result = $db->query('select imgFolderNum from user where id='.$_SESSION['uid'])->fetch_assoc();
+	$result = $db->query('select imgFolderNum from user where id='.$_SESSION['uid'])->fetch();
 	$imgFolderNum = $result['imgFolderNum'];
 	$db->query('update user set imgFolderNum='.($imgFolderNum+1));
 	//将相册的信息插入到信息表

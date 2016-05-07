@@ -13,8 +13,8 @@ if(isset($_POST['loginType']) && isset($_POST['password']) && isset($_POST['logi
 			$result = $db->query('select * from user where name="'.$_POST['loginStr'].'"');
 			break;
 	}
-	if($result->num_rows > 0){
-		$result = $result->fetch_assoc();
+	if($result->rowCount() > 0){
+		$result = $result->fetch();
 		$password = $result['password'];
 		if($password === sha1($_POST['password'])){
 			$_SESSION['name'] = $result['name'];

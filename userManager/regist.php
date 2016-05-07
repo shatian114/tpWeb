@@ -3,14 +3,14 @@ require_once '../dbInterface.php';
 if(isset($_POST['name']) && isset($_POST['password'])){
 	//查找用户名是否存在，不存在才可以注册
 	$result = $db->query('select * from user where name="'.$_POST['name'].'"');
-	if($result->num_rows > 0){
+	if($result->rowCount() > 0){
 		echo '2';
 	}else{
 		//插入用户信息到数据库
 		$db->query('insert into user (name, password) values("'.$_POST['name'].'", "'.sha1($_POST['password']).'")');
 		//创建用户相关表
 		$result = $db->query('select id from user where name="'.$_POST['name'].'"');
-		$result = $result->fetch_assoc();
+		$result = $result->fetch();
 		$uid = $result['id'];
 		//创建签到表
 		$db->query('create table checkIn'.$uid.'(checkInDate date, checkInTime time, continuousNum int unsigned)');
